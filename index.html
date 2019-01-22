@@ -1,237 +1,1005 @@
 <style>
 
-#test1modal {
-  padding: 50px 50px 50px 50px;
+#TBModal, #DBModal, #AddModal, #EditModal, #DLModal {
+  margin: 25 25 25 25;
 }
 
-.lghtbck1 {
-  background-color: #f9e6ff;
+#resetSS {
+  padding: 3px;
+  color: #FFFFFF;
+  font-size: 10px;
+  border-radius: 45px;
+  border-color: #FFFFFF;
+  background-color: #990033;
 }
 
-.lghtbck2 {
-  background-color: #f2ccff;
-}
-
-.lghtbck3 {
-  background-color: #ffb3ff;
-}
-
-.button1 {
+#addrow {
+  border-radius: 35px;
+  padding: 5px;
+  color: #ffe6f9;
   border: 1px;
-  border-radius: 25px;
-  color: #ffffff;
-  background-color: #990099;
+  border-color: #FFFFFF;
+  background-color: #e600ac;
 }
 
-.button2 {
-  border: 1px;
-  border-radius: 50px;
-  color: #ffffff;
-  background-color: #800080;
+#pagehd {
+  color: #FFFFFF;
+  background-color: #b30059;
 }
 
-.button3 {
+#adddatabase, #addtable, #generateRPRT {
+  border-radius: 35px;
+  padding: 5px;
+  color: #ffe6f9;
   border: 1px;
-  border-radius: 75px;
-  color: #ffffff;
-  background-color: #660066;
+  border-color: #FFFFFF;
+  background-color: #660033;
 }
 
-.WSopt {
+#viewtable, #testadd {
+  border-radius: 35px;
+  padding: 5px;
+  color: #ffe6f9;
   border: 1px;
+  border-color: #FFFFFF;
+  background-color: #b30059;
+}
+
+#closeDBModal, #saveDBModal,
+#closeTBModal, #saveTBModal,
+#closeRPTModal, #goRPTModal {
+  border-radius: 35px;
+  padding: 5px;
+  color: #FFFFFF;
+  border: 1px;
+  border-color: #FFFFFF;
+  background-color: #800040;
+}
+
+#colgo, #browsefiles,
+#saveAddModal, #saveEditModal,
+#editEditModal {
+  border-radius: 35px;
+  padding: 5px;
+  color: #FFFFFF;
+  border: 1px;
+  border-color: #FFFFFF;
+  background-color: #b30059;
+}
+
+#dbselect, #tbselect, .tablesort {
+  /*color: #ffe6f9;*/
+  background-color: #ffe6ff;
+  border-color: #000000;
   width: 150px;
-  color: #ffffff;
-  /*padding: 20px;*/
-  background-color: #660066;
+  height: 25px;
 }
 
-input, select {
-  height: 35px;
-  width: 150px;
-  /*padding: 10px;*/
+#viewtable {
   border: 1px;
-  border-color: #ffffff;
+  border-color: #000000;
+}
+
+.DBinpt, .TBinpt {
+  border: 1px;
+  border-color: #33001a;
+  background-color: #ffe6f2;
+}
+
+.RWinpt, .REDinpt, #createTBdb {
+  border: 1px;
+  border-color: #ffe6ff;
+  background-color: #fff2e6;
+}
+
+.modal-header, .modal-footer {
+  color: #FFFFFF;
+  border: 1px;
+  border-color: #FFFFFF;
+  background-color: #ffe6ee;
+}
+
+.modal {
+  margin: 75px 75px;
+  position: relative;
+}
+
+.editrow, .dwnldrow {
+  font-size: 11px;
+  border-radius: 45px;
+  padding: 5px;
+  color: #FFFFFF;
+  border: 3px;
+  border-color: #FFFFFF;
+  background-color: #dd99ff;
+}
+
+.tbentry {
+  width: 75px;
+}
+
+.remadd {
+  font-size: 8px;
+  border-radius: 45px;
+  /*padding: 3px;*/
+  color: #FFFFFF;
+  border: 3px;
+  border-color: #FFFFFF;
+  background-color: #ff0000;
+}
+
+th, tr, td {
+  padding: 10px;
+  border: 1px;
+  border-color: #000000;
 };
 
 </style>
 
-<!-- Notes 2018-05-20 Move out font-family.. -->
-<div class="col-12-lg lghtbck1" style="height: 1500px;">
-  <div class="row lghtbck2">
-    <div>
-      <h2 align="center" style="padding:10px; font-family: cambria;">
-      	<b>Web-Scraping</b>
-      </h2>
-      <h6 align="center" style="padding:10px; font-family: cambria;">
-        <b>(Interface)</b>
-      </h6>
-    </div>
+<div class="col-lg-12">
+  <h3 id="pagehd" align="center">UX Database</h3>
+  <br>
+  <div align="left">
+    <span>
+      <button id="adddatabase" data-target="#DBModal" data-toggle="modal">Add Database</button>
+      <button id="addtable" data-target="#TBModal" data-toggle="modal">Add Table</button>
+    </span>
+    <button id="generateRPRT" data-target="#ReportModal" data-toggle="modal">Generate Report</button><br><br>
+  </div> 
+  <div align="center" style="background-color: #FFFFFF;">
+    <!-- <b>Database</b><br> -->
+    <select id="dbselect">
+      <option selected>Select Database</option>
+      <option>App1</option>
+      <option>App2</option>
+      <option>Web1</option>
+      <option>Web2</option>
+      <option>Firmware</option>
+    </select><br>
+  	<br>
+  <div align="center" style="background-color: #FFFFFF;">
+    <!-- <b>Table</b><br> -->
+    <select hidden id="tbselect">
+      <option selected>Select Table</option>
+      <option>Versions</option>
+      <option>Tasks</option>
+      <option>Documents</option>
+    </select><br>
+    <br>
+    <span>
+      <button hidden id="viewtable">View Table</button>
+      <button hidden id="addrow" data-target="#AddModal" data-toggle="modal">Add Row</button>
+    </span>
   </div>
-  <div class="row lghtbck1" style="padding:25px" align="center">
-   <!-- Scrape Categories -->
-    <div id="scrape_opts">
-      <span style="padding:15px">
-        <button id="opt1" type="button" class="WSopt" style="font-family: cambria;">
-          Search Engines
-        </button>
-      </span>
-      <span style="padding:15px">
-        <button disabled id="opt2" type="button" class="WSopt" style="font-family: cambria;">
-          Social Media
-        </button>
-      </span>
-      <span style="padding:15px">
-        <button disabled id="opt3" type="button" class="WSopt" style="font-family: cambria;">
-          Third Option
-        </button>
-      </span>
-    </div>
-    <br><br><br>
-    <!-- Scrape Categories > Search Engine Options -->
-    <div hidden id="search_engines" align="center">
-      <span style="padding:15px">
-        <button id="test1" data-target="#test1modal" data-toggle="modal" type="button" class="button1" style="font-family: cambria;">
-          Google Results
-         </button>
-      </span>
-      <span style="padding:15px">
-        <button disabled id="" data-target="" data-toggle="modal" type="button" class="button2" style="font-family: cambria;">
-          Yahoo Results
-        </button>
-      </span>
-      <span style="padding:15px">
-        <button disabled id="" data-target="" data-toggle="modal" type="button" class="button3" style="font-family: cambria;">
-          AOL Results
-        </button>
-      </span>
-    </div>
+  <br>
+  <div align="center">
+    <input hidden id="SSinput" placeholder="Search">
+    <select hidden id="priorselect" class="tablesort">
+      <option selected>Priority</option>
+      <option>High</option>
+      <option>Medium</option>
+      <option>Low</option>
+    </select>
+    <select hidden id="OSselect" class="tablesort">
+      <option selected>OS</option>
+      <option>iPhone</option>
+      <option>Android</option>
+    </select>
+    <select hidden id="STATselect" class="tablesort">
+      <option selected>Status</option>
+      <option>Done</option>
+      <option>In Progress</option>
+      <option>Obsolete</option>
+    </select>
+    <button hidden id="resetSS">Reset</button>
+    <br><br>
+    <table hidden id="viewtableTB" border="1">
+    </table>
   </div>
-  <div class="row lghtbck1" style="padding:45px">
-    <div id="display" align="center">
-      <span style="padding:15px">
-      </span>
-    </div>
-  </div>
+  <br><br><br>
 </div>
-
-<!-- Notes 2018-05-20 Combine All.. (Google, Yahoo, AOL, etc...)... -->
-<!--Modal: Scrape Google Results-->
-<div id="test1modal" class="modal" role="dialog">
+<!-- Modals -->
+<!-- Add DB Modal -->
+<div id="DBModal" class="modal modal-lg" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header lghtbck3">
-        <h3 style="color: #ffffff; font-family: cambria;" align="center">Google</h3>
+      <div class="modal-header">
+        <h2 align="center">Add Database</h2>
       </div>
       <div class="modal-body">
-        <form class="form-inline">
-          <div class="form-group" style="padding: 15px;">
-            <h6 style="font-family: cambria;"><b>Search Section</b></h6>
-            <select id="google_section" class="lghtbck1">
-              <option selected>Section</option>
-              <option>All</option>
-              <option>News</option>
-              <option>Videos</option>
-              <option>Images</option>
-            </select><br><br>
-            <h6 style="font-family: cambria;"><b>Search Keyword</b></h6>
-            <input id="google_search" class="lghtbck1" placeholder="Search"><br>
+        <form>
+          <div class="form-group" align="center">
+            Database Name <br><input type="text" class="DBinpt" placeholder=""><br><br>
           </div>
-          <div id="google_additional0" class="form-group" style="padding: 15px;">
-            <h6 style="font-family: cambria;"><b>Data</b></h6>
-            <input checked type="checkbox" style="width: 15px; height: 15px;">Titles<br>
-            <input checked type="checkbox" style="width: 15px; height: 15px;">URLs<br>
-            <input checked type="checkbox" style="width: 15px; height: 15px;">Description<br>
+          <!-- <div class="form-group"> -->
+            <!-- Opt2 <br><input type="text" class="DBinpt" placeholder=""><br> -->
+            <!-- Opt3 <br><input type="text" class="DBinpt" placeholder=""><br> -->
+          <!-- </div> -->
+          <!-- <div class="form-group"> -->
+            <!-- Opt4 <br><input type="text" class="DBinpt" placeholder=""><br> -->
+            <!-- Opt5 <br><input type="text" class="DBinpt" placeholder=""><br> -->
+          <!-- </div> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="closeDBModal" class="modalbtn" data-dismiss="modal">Close</button>
+        <button id="saveDBModal" class="modalbtn" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add TB Modal -->
+<div id="TBModal" class="modal modal-lg" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 align="center">Add Table</h2>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group" align="center">
+            <select id="createTBdb">
+              <option selected>Select Database</option>
+              <option>App1</option>
+              <option>App2</option>
+              <option>Web1</option>
+              <option>Web2</option>
+              <option>Firmware</option>
+            </select>
+            <br>
+          </div>
+          <div class="form-group">
+            Table Name<br><input disabled id="newtbname" type="text" class="TBinpt"><br>
+            <!--  -->
+            <!--  -->
+            <!-- NOTES 2018-05-08 HERE -->
+            <!-- After this Input- Col Name, Col Type, Col Length Display -->
+            Number of Columns<br><input disabled id="noCols" type="text" class="TBinpt" placeholder="#"><br>
+            <!-- Instead do on input, on change, adjust fields*** -->
+            <!--  -->
+            <!-- Opt3<br><input type="text" class="TBinpt"><br> -->
+            <!-- Opt4<br><input type="text" class="TBinpt"><br> -->
+            <!-- Opt5<br><input type="text" class="TBinpt"><br> -->
           </div>
         </form>
-       </div>
-      <div class="modal-footer lghtbck3">
-        <form class="form-inline" align="center">
-            <button class="button2" data-dismiss="modal" style="font-family: cambria;">
-              Close
-            </button>
-            <button disabled id="googleGo" class="button2" data-dismiss="modal" style="font-family: cambria;">
-              Go
-            </button>         
+        <div id="colload" class="form-group">
+        </div>
+      
+      </div>
+      <div class="modal-footer">
+        <button id="closeTBModal" class="modalbtn" data-dismiss="modal">Close</button>
+        <button disabled id="saveTBModal" class="modalbtn" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Row Modal -->
+<div id="AddModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 align="center">Add Row</h2>
+      </div>
+      <div id="addInput" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button id="closeTBModal" class="modalbtn" data-dismiss="modal">Close</button>
+        <button id="saveAddModal" class="modalbtn" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Row Modal -->
+<div id="EditModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 align="center">Edit Row</h2>
+      </div>
+      <div id="editInput" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button id="closeTBModal" class="modalbtn" data-dismiss="modal">Close</button>
+        <button id="editEditModal" class="modalbtn">Edit</button>
+        <button disabled id="saveEditModal" class="modalbtn" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Download Row Modal -->
+<div id="DLModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 align="center">Edit Row</h2>
+      </div>
+      <div id="downloadInput" class="modal-body">
+        <form>
         </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button id="closeTBModal" class="modalbtn" data-dismiss="modal">Close</button> -->
+        <!-- <button id="saveEditModal" class="modalbtn" data-dismiss="modal">Save</button> -->
       </div>
     </div>
   </div>
 </div>
 
-<!-- Notes 2018-05-20 Do this (style sheets) yourself...-->
-<!-- https://developers.google.com/speed/libraries/ -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Report Modal -->
+<div id="ReportModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Report Modal</h3>
+      </div>
+      <div class="modal-body">
+        <h4 style="color: purple; font-size: 20px;" align="center">In Progress....</h4>
+      </div>
+      <div class="modal-footer">
+        <button id="closeRPTModal" class="modalbtn" data-dismiss="modal">Close</button>
+        <button id="goRPTModal" class="modalbtn" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Test Modal -->
+<div id="testmodal" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>TESTING</h3>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sandstone/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 
-///// Notes 2018-05-20 In Progress...
-////@MichelleFairow.
-////Desc: Search Engines.
-$("#opt1").on("click", function() {
-  var isexp = $("#search_engines").attr("exp");
-  if (isexp === "0") {
-  	$("#search_engines").attr("exp", "1");
-    $("#search_engines").attr("hidden", false);
-    $("#opt1").css("background-color", "#000000");
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+//// $(".modalbtn").on("click", function() {
+////   $("#DBModal").hide();
+////   $("#TBModal").hide();
+//// });
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#createTBdb").on("change", function() {
+  if ($("#createTBdb").val() !== "Select Database") {
+    $("#newtbname").attr("disabled", false);
+    $("#noCols").attr("disabled", false);
   } else {
-  	$("#search_engines").attr("exp", "0");
-  	$("#search_engines").attr("hidden", true);
-  	$("#opt1").css("background-color", "#660066");
+    $("#newtbname").attr("disabled", true);
+    $("#noCols").attr("disabled", true);
   }
 });
 
 
-///// Notes 2018-05-20 In Progress...
-////@MichelleFairow.
-////Desc: Search Engines > Google.
-$("#google_section").on("change", function() {
-  var gsect = $("#google_section").val();
-  if (gsect === "Section") {
-   $("#google_search").attr("disabled", true);
-   $("#googleGo").attr("disabled", true);
-  } else {
-    $("#google_search").attr("disabled", false);
-    $("#googleGo").attr("disabled", false);
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$(document).ready(function() {
+  $("#dbselect").val("Select Database");
+})
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#dbselect").change(function() {
+  var dbval = $("#dbselect").val();
+  var tohide = ["#priorselect", "#STATselect", "#OSselect", "#resetSS",
+                "#SSinput", "#viewtableTB", "#addrow", "#viewtable"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", true);
+  }
+  if (dbval === "Select Database") {
+    $("#tbselect").attr("hidden", true);
+  } else { /// load table select
+    $("#tbselect").attr("hidden", false);
   }
 });
 
 
-/////Notes 2018-05-20 In Progress...
-////@MichelleFairow.
-////Desc:
-function ScrapeGoogle() {
-  var srch = $("#google_search").val(),
-      sctn = $("#google_section").val();
-  var toget = [];
-  var ggleadd = document.getElementById("google_additional0");
-  var chcks = ggleadd.getElementsByTagName("input");
-  for (i = 0; i < chcks.length; i++) {
-  	if (chcks[i].checked === true) {
-  		toget[toget.length] = chcks[i].name;
-  	}
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#tbselect").change(function() {
+  var tbval = $("#tbselect").val();
+  var tohide = ["#priorselect", "#STATselect", "#OSselect", "#resetSS",
+                "#SSinput", "#viewtableTB", "#addrow", "#viewtable"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", true);
+  }
+  if (tbval === "Select Table") {
+    $("#viewtable").attr("hidden", true);
+  } else { /// load table select
+    $("#viewtable").attr("hidden", false);
+  } 
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc: Load Database to Select for Table Creation.
+// function loadCreateDBs() {
+//
+// };
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#viewtable").on("click", function() {
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  if (tbval === "Versions") {
+    var myurl = "load_versions";
+  } else if (tbval === "Tasks") {
+    var myurl = "load_tasks";
+  } else if (tbval === "Documents") {
+    var myurl = "load_documents";
+  } else {
+    console.log("Error.")
   }
   $.ajax({
-  	type: "POST",
-  	data: {"srch": srch, "sctn": sctn, "toget": toget},
-  	url: "scrape_google",
-  	success:function(data) {
-  	  console.log("success");
-  	},
-  	error:function(data) {
-  	  console.log("error");
-  	}, 
-  	complete:function(data) {
-  	  console.log("complete");
-  	}
+    type: "POST",
+    url: myurl,
+    data: {"dbval": dbval, "tbval": tbval},
+    success:function(data) {
+      if (tbval === "Versions") {
+        VersionsTABLE(data);
+      } else if (tbval === "Tasks") {
+        TasksTABLE(data);
+      } else if (tbval === "Documents") {
+        DocsTABLE(data);
+      } else {
+        console.log("Error.")
+      }
+    }, error:function(data) {
+      console.log("error");
+    }
   });
+  var tohide = ["#viewtableTB", "#addrow", "#SSinput"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", false);
+  }
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function VersionsTABLE(data) {
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  $("#viewtableTB").empty();
+  /// Call Function from Controller & get table info.
+  $("#viewtableTB").append("<thead><th colspan='7'><p align='center' style='background-color: #ffe6ee;'>"
+                           + dbval +"<br>" + tbval +"</p></th></thead>");
+  $("#viewtableTB").append("<thead><th>ID</th>"
+                           + "<th>Version Number</th>"
+                           + "<th>Start Date</th>"
+                           + "<th>End Date</th>"
+                           + "<th>Created On</th>"
+                           + "<th>Modified On</th>"
+                           + "<th>Action</th></thead>"
+                           + "<tbody></tbody>");
+  if (data.length > 0) {
+    var jsondata = JSON.parse(data);
+    for (i = 0; i < jsondata.length; i++) {
+      $("#viewtableTB tbody").append("<tr id='tr" + i + "'>"
+                                     + "<td>" + jsondata[i]["id"] + "</td>"
+                                     + "<td>" + jsondata[i]["version_no"] + "</td>"
+                                     + "<td>" + jsondata[i]["start_date"] + "</td>"
+                                     + "<td>" + jsondata[i]["end_date"] + "</td>"
+                                     + "<td>" + jsondata[i]["created_on"] + "</td>"
+                                     + "<td>" + jsondata[i]["modified_on"] 
+                                     + "</td><td>"
+                                     + "<button id='editrow" + i + "' class='editrow' data-target='#EditModal' "
+                                      + "data-toggle='modal' onclick='EditROW(" + i + ")'>Edit</button>"
+                                     + "<button id='dwnldrow" + i + "' class='dwnldrow'>Download</button>"
+                                     + "</td></tr>");
+    }
+  } else {
+    $("#viewtableTB tbody").append("<tr><td colspan='7'><p align='center'>No Information.</p></td></tr>");
+  }
+  var tohide = ["#priorselect", "#STATselect", "#OSselect", "#resetSS"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", true);
+  }
 };
 
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function TasksTABLE(data) {
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  $("#viewtableTB").empty();
+  /// Call Function from Controller & get table info.
+  $("#viewtableTB").append("<thead><th colspan='10'><p align='center' style='background-color: #ffe6ee;'>" 
+                           + dbval +"<br>" + tbval +"</p></th></thead>");
+  $("#viewtableTB").append("<thead><th>ID</th>"
+                           + "<th>Version Number</th>"
+                           + "<th>OS</th>"
+                           + "<th>Type</th>"
+                           + "<th>Status</th>"
+                           + "<th>Priority</th>"
+                           + "<th colspan='3'>Description</th>"
+                           + "<th>Action</th></thead>"
+                           + "<tbody></tbody>");
+  if (data.length > 0) {
+    var jsondata = JSON.parse(data);
+    for (i = 0; i < jsondata.length; i++) {
+      $("#viewtableTB tbody").append("<tr id='tr" + i + "'>"
+                                     + "<td>" + jsondata[i]["id"] + "</td>"
+                                     + "<td>" + jsondata[i]["version_no"] + "</td>"
+                                     + "<td>" + jsondata[i]["OS"] + "</td>"
+                                     + "<td>" + jsondata[i]["tsktype"] + "</td>"
+                                     + "<td>" + jsondata[i]["status"] + "</td>"
+                                     + "<td>" + jsondata[i]["priority"] + "</td>"
+                                     + "<td colspan='3'>" + jsondata[i]["descr"] 
+                                     + "</td><td>"
+                                     + "<button id='editrow" + i + "' class='editrow' data-target='#EditModal' "
+                                       + "data-toggle='modal' onclick='EditROW(" + i + ")'>Edit</button>"
+                                     + "<button id='dwnldrow" + i + "' class='dwnldrow'>Download</button>"
+                                     + "</td></tr>");
+    }
+  } else {
+    $("#viewtableTB").append("<tr><td colspan='10'><p align='center'>No Information.</p></td></tr>");
+  }
+  var tohide = ["#priorselect", "#STATselect", "#OSselect", "#resetSS"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", false);
+  }
+  $("#priorselect").val("Priority");
+  $("#STATselect").val("Status");
+  $("#OSselect").val("OS");
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function DocsTABLE(data) {
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  $("#viewtableTB").empty();
+  /// Call Function from Controller & get table info.
+  $("#viewtableTB").append("<thead><th colspan='5'><p align='center' style='background-color: #ffe6ee;'>"
+                           + dbval +"<br>" + tbval +"</p></th></thead>");
+  $("#viewtableTB").append("<thead><th>ID</th>"
+                           + "<th>Version Number</th>"
+                           + "<th>Task ID</th>"
+                           + "<th>Files</th>"
+                           + "<th>Action</th></thead>"
+                           + "<tbody></tbody>");
+  if (data.length > 0) {
+    var jsondata = JSON.parse(data);
+    for (i = 0; i < jsondata.length; i++) {
+      $("#viewtableTB tbody").append("<tr id='tr" + i + "'>"
+                                     + "<td>" + jsondata[i]["id"] + "</td>"
+                                     + "<td>" + jsondata[i]["version_no"] + "</td>"
+                                     + "<td>" + jsondata[i]["task_id"] + "</td>"
+                                     + "<td>" + jsondata[i]["files"] 
+                                     + "</td><td>"
+                                     + "<button id='editrow" + i + "' class='editrow' data-target='#EditModal' "
+                                     +  "data-toggle='modal' onclick='EditROW(" + i + ")'>Edit</button>"
+                                     + "<button id='dwnldrow" + i + "' class='dwnldrow'>Download</button>"
+                                     + "</td></tr>");
+    }
+  } else {
+    $("#viewtableTB").append("<tr><td colspan='5'><p align='center'>No Information.</p></td></tr>");
+  }
+  //// Loop/Function
+  var tohide = ["#priorselect", "#STATselect", "#OSselect", "#resetSS"];
+  for (i = 0; i < tohide.length; i++) {
+    $(tohide[i]).attr("hidden", true);
+  }
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+///$("#browsefiles").on("click", function() {
+function myFunction() {
+  var x = document.createElement("INPUT");
+  x.setAttribute("hidden", true);
+  x.setAttribute("type", "file");
+  x.click();
+  document.body.appendChild(x);
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function addVERSIONS() {
+ $("#addInput").append(
+    "<form><div class='form-group'>"
+    + "Version Number <input type='text' class='RWinpt' name='version_no'><br><br>"
+    + "Start Date <input type='text' class='RWinpt' name='start_date'><br><br>"
+    + "End Date <input type='text' class='RWinpt' name='end_date'><br><br></div></form>");
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function addTASKS() {
+  $("#addInput").append(
+    "<form><div class='form-group'>"
+    + "Version Number <input type='text' class='RWinpt' name='version_no'><br><br>"
+    + "OS <select class='RWinpt' name='os'>"
+      + "<option selected>iPhone</option>"
+      + "<option>Android</option>"
+    + "</select><br><br>"
+    + "Type <select class='RWinpt' name='tsktype'>"
+      + "<option selected>Bug</option>"
+      + "<option>Improvement</option>"
+      + "<option>Suggestion</option>"
+      + "<option>Marketing</option>"
+      + "<option>...</option>"
+    + "</select><br><br>"
+    + "Status <select class='RWinpt' name='status'>"
+      + "<option selected>In Progress</option>"
+      + "<option>Done</option>"
+      + "<option>Obsolete</option>"
+      + "<option>...</option>"
+    + "</select><br><br>"
+    + "Priority <select class='RWinpt' name='priority'>"
+      + "<option selected>High</option>"
+      + "<option>Medium</option>"
+      + "<option>Low</option>"
+    + "</select><br><br>"
+    + "Description <input type='text' class='RWinpt' name='desc'><br><br>"
+    + "Assigned To <input type='text' class='RWinpt' name='assigned_to'><br><br>"
+    + "</div></form>");
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function addDOCS() {
+  $("#addInput").append(
+      "<form><div class='form-group'>"
+     + "Version Number <input type='text' class='RWinpt' name='version_no'><br><br>"
+     + "Task ID <input type='text' class='RWinpt' name='task_id'><br><br>"
+     + "Files <input type='text' class='RWinpt' name='files'><br><br>"
+     + "<button id='browsefiles' onclick='myFunction()'>Browse</button><br></div></form>");
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#addrow").on("click", function() {
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  $("#AddModal .modal-header").empty();
+  $("#AddModal .modal-header").append("<b>", dbval, "\n", tbval, "</b>");
+  $("#AddModal .modal-body").empty();
+  if (tbval === "Versions") {
+    addVERSIONS();
+  } else if (tbval === "Tasks") {
+    addTASKS();
+  } else if (tbval === "Documents") {
+    addDOCS();
+  } else {
+    console.log("Error.");
+  }
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#saveAddModal").on("click", function() {
+  var mydata = {};
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  var mdbdy = document.getElementById("addInput");
+  var mdinpts = mdbdy.getElementsByTagName("input");
+  var mdslcts = mdbdy.getElementsByTagName("select");
+  for (i = 0; i < mdinpts.length; i++) {
+    mydata[mdinpts[i].name] = mdinpts[i].value;
+  }
+  for (i = 0; i < mdslcts.length; i++) {
+    mydata[mdslcts[i].name] = mdslcts[i].value;
+  }
+  if (tbval === "Versions") {
+    var myurl = "insert_versions";
+  } else if (tbval === "Tasks") {
+    var myurl = "insert_tasks";
+  } else if (tbval === "Documents") {
+    var myurl = "insert_documents";
+  } else {
+    console.log("else...");
+  }
+  $.ajax({
+    type: "POST",
+    url: myurl,
+    data: {"dbval": dbval, "tbval": tbval, mydata},
+    success:function(data) {
+      console.log("success");
+    },
+    error:function(data) {
+      console.log("error");
+    }
+  });
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#SSinput").on("input", function() {
+  var ssval = $("#SSinput").val();
+  var tb = document.getElementById("viewtableTB");
+  var tbbody = tb.getElementsByTagName("tbody");
+  var tbrows = tbbody[0].getElementsByTagName("tr");
+  for (i = 0; i < tbrows.length; i++) {
+    if (ssval !== "") {
+      var rowhtml = tbrows[i].innerHTML;
+      if (rowhtml.search(ssval) === -1) {
+        tbrows[i].hidden = true;
+      } else {
+        tbrows[i].hidden = false;
+      }
+    } else {
+      tbrows[i].hidden = false;
+    }
+  }
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function editVERSIONS(data) {
+  var strkeys = ["version_no", "start_date", "end_date", "created_on"];
+  for (i = 0; i < strkeys.length; i++) {
+    var lbl = strkeys[i].replace("_", " ").toUpperCase();
+    $("#editInput").append(lbl + "<br><input disabled id='" + strkeys[i] + "'type='text' class='REDinpt'><br><br>");
+    // console.log(data[0][strkeys[i]]);
+    $("#" + strkeys[i]).val(data[0][strkeys[i]]);
+  }
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function editTASKS(data) {
+  var strkeys = ["version_no", "OS", "tsktype", "status", "priority", "descr"];
+  $("#editInput").append("<div id='div1' class='col-sm-3'><form></form></div>");
+  $("#editInput").append("<div id='div2' class='col-sm-3'><form></form></div>");
+  for (i = 0; i < strkeys.length; i++) {
+    var lbl = strkeys[i].replace("_", " ").toUpperCase();
+    if (i < 3) {
+      $("#div1 form").append(lbl + "<input disabled id='" + strkeys[i] + "' type='text' class='REDinpt'><br>");
+    } else {
+      $("#div2 form").append(lbl + "<input disabled id='" + strkeys[i] + "' type='text' class='REDinpt'><br>");
+    }
+    $("#" + strkeys[i]).val(data[0][strkeys[i]]);
+  }
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function editDOCS(data) {
+  var strkeys = ["version_no", "task_id", "files"];
+  for (i = 0; i < strkeys.length; i++) {
+    var lbl = strkeys[i].replace("_", " ").toUpperCase();
+    $("#editInput").append(lbl + "<br><input disabled id='" + strkeys[i] + "' type='text' class='REDinpt'><br><br>");
+    // console.log(data[0][strkeys[i]]);
+    $("#" + strkeys[i]).val(data[0][strkeys[i]]);
+  }
+};
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+$("#editEditModal").on("click", function() {
+  var edtarea = document.getElementById("editInput");
+  var edtinpts = edtarea.getElementsByTagName("input");
+  // console.log(edtinpts.length);
+  for (i = 0; i < edtinpts.length; i++) {
+    $("#"+edtinpts[i].id).attr("disabled", false);
+  }
+  //// $("#saveEditModal").attr("disabled", false);
+});
+
+
+////Notes 2018-05-09 In Progress...
+///@MichelleFairow.
+///Desc:
+function EditROW(id) {
+  /// Notes 2018-05-08 Move These Out*
+  var dbval = $("#dbselect").val();
+  var tbval = $("#tbselect").val();
+  var row = document.getElementById("tr"+id)
+  var rowtds = row.getElementsByTagName("td");
+  if (rowtds.length > 0) {
+    var id = rowtds[0].innerHTML;
+    if (tbval === "Versions") {
+      var myurl = "edit_versions";
+    } else if (tbval === "Tasks") {
+      var myurl = "edit_tasks";
+    } else if (tbval === "Documents") {
+      var myurl = "edit_documents";
+    } else {
+      console.log("else...");
+    }
+    $("#editInput").empty();
+    $.ajax({
+      type: "POST",
+      url: myurl,
+      data: {"dbval": dbval, "tbval": tbval, "id": id},
+      success:function(data) {
+        if (data !== 1) {
+          var jsondata = JSON.parse(data);
+          // console.log(jsondata);
+          if (tbval === "Versions") {
+            editVERSIONS(jsondata);
+          } else if (tbval === "Tasks") {
+            editTASKS(jsondata);
+          } else if (tbval === "Documents") {
+            editDOCS(jsondata);
+          } else {
+          console.log("else...");
+          }
+        } else {
+          $("#editInput").append("<h3>ERROR</h3>");
+        }
+      },
+      error:function(data) {
+        console.log("error");
+      }
+    });
+  }
+};
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+////$("#saveEditModal").on("click", function() {
+////};
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+$(".tablesort").on("change", function() {
+  cond = []
+  var priorval = $("#priorselect").val();
+  if (priorval !== "Priority") {
+    cond[cond.length] = priorval;
+  }
+  var statval = $("#STATselect").val();
+  if (statval !== "Status") {
+    cond[cond.length] = statval;
+  }
+  var osval = $("#OSselect").val();
+    if (osval !== "OS") {
+      cond[cond.length] = osval;
+  } 
+  var tb = document.getElementById("viewtableTB");
+  var tbbody = tb.getElementsByTagName("tbody");
+  var tbrows = tbbody[0].getElementsByTagName("tr");
+  for (i = 0; i < tbrows.length; i++) {
+    var rowhtml = tbrows[i].innerHTML;
+    if (cond.length > 0) {
+      for (j = 0; j < cond.length; j++) {
+        if (rowhtml.search(cond[j]) === -1) {
+          tbrows[i].hidden = true;
+        } else {
+          if (tbrows[i].hidden !== true) {
+            tbrows[i].hidden = false;
+          }
+        }
+      }
+    } else {
+      tbrows[i].hidden = false;
+    }
+  }
+});
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+$("#resetSS").on("click", function() {
+  $("#SSinput").val("");
+  $("#priorselect").val("Priority");
+  $("#OSselect").val("OS");
+  $("#STATselect").val("Status");
+  var tb = document.getElementById("viewtableTB");
+  var tbbody = tb.getElementsByTagName("tbody");
+  var tbrows = tbbody[0].getElementsByTagName("tr");
+  for (i = 0; i < tbrows.length; i++) {
+    tbrows[i].hidden = false;
+  }
+});
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+$("#noCols").on("input", function() {
+  $("#colload").empty();
+  var nocols = $("#noCols").val();
+  console.log(nocols);
+  // $("#noCols").attr("disabled", true);
+  //// Math.ceil(nocols/5);
+  for (i = 0; i < nocols; i++) {
+    $("#colload").append("<form class='form-inline'>"
+                         + "<input id='name" + i + "' class='input-sm tbentry' type='text' placeholder='Name'>"
+                         + "<input id='type" + i + "' class='input-sm tbentry' type='text' placeholder='Type'>"
+                         + "<input id='default" + i + "' class='input-sm tbentry' type='text' placeholder='Default'>"
+                         ///// + "<button id='del" + i + "' class='remadd info'>X</button>"
+                         + "</form>");
+  }
+});
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+$("generateRPRT").on("click", function() {
+  console.log("In Progress...");
+});
+
+
+//////Notes 2018-05-09 In Progress...
+/////@MichelleFairow.
+/////Desc:
+///// $(".remadd").on("click", function() {
+/////   var nocols = $("#noCols").val();
+/////   var id = this.id.replace("del", "");
+/////   //// Loop
+/////   $("#name" + id).remove();
+/////   $("#type" + id).remove();
+/////   $("#default" + id).remove();
+/////   $("#default" + id).remove();
+/////   $("#noCols").val(nocols-1);
+///// });
+
+/////////// Notes 2018-05-2018 File Upload Code
+////<button onclick="myFunction()">Upload File</button>
+////<script>
+////function myFunction() {
+////  var x = document.createElement("INPUT");
+///x.setAttribute("hidden", true);
+////   x.setAttribute("type", "file");
+////x.click();
+////   document.body.appendChild(x);
+////}/
 
 </script>
