@@ -91,12 +91,12 @@ class ZmodoLoginForgot(unittest.TestCase):
 		frgtall.click()
 		time.sleep(0.75)
     
-    #### Zmodo Website >  Forogt Username/Password > Submit.
-    def testing00(self):
-    	self.assertIn("Zmodo", str(self.drvr.title))
-    	sbtn = self.drvr.find_elements_by_tag_name("button")
-    	if len(sbtn) > 0:
-    		sbtn[0].click()
+	#### Zmodo Website >  Forogt Username/Password > Submit.
+	def testing00(self):
+		self.assertIn("Zmodo", str(self.drvr.title))
+		sbtn = self.drvr.find_elements_by_tag_name("button")
+		if len(sbtn) > 0:
+			sbtn[0].click()
 			time.sleep(0.25)
 			self.assertEqual(1, len(self.drvr.find_elements_by_class_name("validation-advice")))
 
