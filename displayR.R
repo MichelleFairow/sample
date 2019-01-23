@@ -113,7 +113,7 @@ resultTlds = function(mytble, mx) {
 
 ### Notes 2018-03-14
 ###@MichelleFairow.
-### Desc: DOAMINS/SUBDOAMINS (mytble[,-1]$SD1-4)
+### Desc: DOMAINS/SUBDOMAINS (mytble[,-1]$SD1-4)
 resultFqdn = function(mytble, mx) {
   SD_CT = length((mytble[,-1]$FQDN))
   lvlCT <- c()
