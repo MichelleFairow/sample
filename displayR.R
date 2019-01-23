@@ -1,6 +1,7 @@
 
 
 ### Notes 2018-03-14
+###@MichelleFairow.
 ### Desc: Titles (mytble[,-1]$Title)
 resultTitles = function(mytble0) {
   yesCT = noCT = 0
@@ -24,6 +25,7 @@ resultTitles = function(mytble0) {
 
 
 ### Notes 2018-03-14
+###@MichelleFairow.
 ### Desc: Pie Chart Labels
 pchartmain = function(mytble, strtype) {
   msg = toupper(strtype)
