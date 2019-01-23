@@ -61,7 +61,7 @@ class ZmodoLogin(unittest.TestCase):
 			time.sleep(1)
 		except:
 			pass
-    
+
 	#### Zmodo Website >  Login: No Email or Password. 
     def testing00(self):
 		self.assertIn("Login", str(self.drvr.title))
@@ -587,5 +587,5 @@ class ZmodoContact(unittest.TestCase):
 
 
 
-if __name__ == '__main__':
-    unittest.main()
+### if __name__ == '__main__':
+###    unittest.main()
