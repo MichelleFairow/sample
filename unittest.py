@@ -1,6 +1,6 @@
 #### Notes 2018-05-01 In Progress...
-### @MichelleFairow.
-### Desc: Testing "https://www.zmodo.com/" Login.
+#### @MichelleFairow.
+#### Desc: Testing "https://www.zmodo.com/" Login.
 class ZmodoLogin(unittest.TestCase):
 	@classmethod
 	def setUp(inst):
@@ -18,7 +18,7 @@ class ZmodoLogin(unittest.TestCase):
 		lgnbtn = self.drvr.find_element_by_id("send2")
 		lgnbtn.click()
 		time.sleep(0.25)
-		### self.drvr.save_screenshot("phantom00.png")
+		#### self.drvr.save_screenshot("phantom00.png")
 		self.assertEqual(2, len(self.drvr.find_elements_by_class_name("validation-advice")))
 
 	#### Zmodo Website >  Login: Send Email. 
@@ -33,7 +33,7 @@ class ZmodoLogin(unittest.TestCase):
 		lgnbtn = self.drvr.find_element_by_id("send2")
 		lgnbtn.click()
 		time.sleep(0.25)
-		### self.drvr.save_screenshot("phantom01.png")
+		#### self.drvr.save_screenshot("phantom01.png")
 		self.assertEqual(2, len(self.drvr.find_elements_by_class_name("validation-advice")))
 
 	#### Zmodo Website >  Login: Send Password. 
@@ -66,7 +66,7 @@ class ZmodoLogin(unittest.TestCase):
 		lgnbtn = self.drvr.find_element_by_id("send2")
 		lgnbtn.click()
 		time.sleep(0.25)
-		### self.drvr.save_screenshot("phantom03.png")
+		#### self.drvr.save_screenshot("phantom03.png")
 		self.assertEqual(2, len(self.drvr.find_elements_by_class_name("validation-advice")))
 
 	@classmethod
@@ -75,8 +75,8 @@ class ZmodoLogin(unittest.TestCase):
 
 
 #### Notes 2018-05-01 In Progress...
-### ### @MichelleFairow.
-### ### Desc: Testing "https://www.zmodo.com/" Login > Forgot Login.
+#### @MichelleFairow.
+#### Desc: Testing "https://www.zmodo.com/" Login > Forgot Login.
 class ZmodoLoginForgot(unittest.TestCase):
 	@classmethod
 	def setUp(inst):
@@ -128,10 +128,10 @@ class ZmodoLoginForgot(unittest.TestCase):
 
 
 #### Notes 2018-05-01 In Progress...
-### Notes 2018-04-30 Switch to open for all?
-### Notes 2018-04-30 Further Page Testing After Navigation & Check Navigation Occurred*
-## @MichelleFairow.
-## Desc: Testing "https://www.zmodo.com/" Home Page.
+#### Notes 2018-04-30 Switch to open for all?
+#### Notes 2018-04-30 Further Page Testing After Navigation & Check Navigation Occurred*
+#### @MichelleFairow.
+#### Desc: Testing "https://www.zmodo.com/" Home Page.
 class ZmodoHome(unittest.TestCase):
 	@classmethod
 	def setUp(inst):
@@ -208,8 +208,8 @@ class ZmodoHome(unittest.TestCase):
 
 
 #### Notes 2018-05-01 In Progress... 
-### ### @MichelleFairow.
-### ### Desc: Testing "https://www.zmodo.com/" > "Support" Page.
+#### @MichelleFairow.
+#### Desc: Testing "https://www.zmodo.com/" > "Support" Page.
 class ZmodoSupport(unittest.TestCase):
 	@classmethod
 	def setUp(inst):
@@ -234,8 +234,8 @@ class ZmodoSupport(unittest.TestCase):
 		if len(inst.drvr.window_handles) > 1:
 			inst.drvr.switch_to_window(inst.drvr.window_handles[-1])
 
-	### Notes 2018-05-01 Use Not CSS
-    #### Zmodo Website >  "Support" > "Zmodo Store Support" Icon.
+	#### Notes 2018-05-01 Use Not CSS
+	#### Zmodo Website >  "Support" > "Zmodo Store Support" Icon.
 	def testing00(self):
 		elem = self.drvr.find_element_by_css_selector("body > div.main > section.supports-part04 > div > ul > li.supports-part04-item.supports-part04-item01")
 		self.assertIn("Support", str(elem.text))
@@ -279,52 +279,6 @@ class ZmodoSupport(unittest.TestCase):
 	def testing08(self):
 		elem = self.drvr.find_element_by_css_selector("body > div.main > section.supports-part05 > div > ul > li.supports-part05-item.supports-part05-item04")
 		self.assertIn("217-903-5037", str(elem.text))
-
-	@classmethod
-	def tearDown(inst):
-		inst.drvr.quit()
-
-
-#### Notes 2018-05-01 In Progress...
-### @MichelleFairow.
-### Desc: Testing "https://www.zmodo.com/" > "Contact" Page.
-class ZmodoContact(unittest.TestCase):
-	@classmethod
-	def setUp(inst):
-		#### inst.drvr = driver_setup(drvr_opt="phantom", drvr_url=None)
-		#### inst.drvr.get("https://www.zmodo.com")
-		inst.drvr = driver_setup(drvr_opt="phantom", drvr_url="https://www.zmodo.com")
-		try:
-			closepw = inst.drvr.find_element_by_class_name("closes")
-			closepw.click()
-			time.sleep(1)
-		except:
-			pass
-		inst.navm = inst.drvr.find_element_by_css_selector("#zmodo-nav > div > ul.nav-list.nav-tit")
-		try:
-			mns = inst.navm.find_elements_by_tag_name("a")
-			mns[38].click()
-		except:
-			try:
-				mns = inst.navm.find_element_by_link_text("Contact")
-				mns.click()
-			except:
-				print "fail @560"
-		time.sleep(0.25)
-		if len(inst.drvr.window_handles) > 1:
-			inst.drvr.switch_to_window(inst.drvr.window_handles[-1])
-
-    #### Zmodo Website >  "Contact" > ...
-    def testing00(self):
-    	pass
-
-	#### Zmodo Website >  "Contact" > ...
-	def testing01(self):
-		pass
-
-	#### Zmodo Website >  "Contact" > ...
-	def testing02(self):
-		pass
 
 	@classmethod
 	def tearDown(inst):
