@@ -1,0 +1,93 @@
+////Notes 2018-05-17 In Progress...
+////@MichelleFairow.
+////Desc: Page Reset.
+function resetPG() {
+  var allinpts = document.getElementsByTagName("input");
+  for(i = 0; i < allinpts.length; i++) {
+    if (allinpts[i].type === "text") {
+      $("#" + allinpts[i].id).val("");
+    } else {
+      allinpts[i].checked = false;
+    }
+  }
+  setLoadingMsg("");
+};
+
+
+////Notes 2018-05-17 In Progress...
+////Notes 2018-05-03 Combine getEngines(), getData(), & getOutput() Eventually.
+////@MichelleFairow.
+////Desc: Search Engines.
+function getEngines() {
+  var TOengine = [];
+  var engarea = document.getElementById("websiteSEL");
+  var engelems = engarea.getElementsByTagName("input");
+  for (i = 0; i < engelems.length; i++) {
+    if (engelems[i].checked === true) {
+      TOengine[TOengine.length] = engelems[i].value;
+    }
+  }
+  return TOengine;
+};
+
+
+////Notes 2018-05-17 In Progress...
+////@MichelleFairow.
+////Desc: Data.
+function getData() {
+  var TOdata = [];
+  var dataarea = document.getElementById("dataSEL");
+  var dataelems = dataarea.getElementsByTagName("input");
+  for (i = 0; i < dataelems.length; i++) {
+    if (dataelems[i].checked === true) {
+      TOdata[TOdata.length] = dataelems[i].value;
+    }
+  }
+  return TOdata;
+};
+
+
+////Notes 2018-05-17 In Progress...
+////@MichelleFairow.
+////Desc: Ouputs.
+function getOutput() {
+  var TOoutput = [];
+  var outarea = document.getElementById("outputSEL");
+  var outelems = outarea.getElementsByTagName("input");
+  for (i = 0; i < outelems.length; i++) {
+    if (outelems[i].checked === true) {
+      TOoutput[TOoutput.length] = outelems[i].value;
+    }
+  }
+  return TOoutput;
+};
+
+
+////Notes 2018-05-17 In Progress...
+////@MichelleFairow.
+////Desc: Search & Return.
+$("#ScrapeNow").on("click", function() {
+  $("#ScrapeNow").attr("disbaled", true);
+  setLoadingMsg("...Working...");
+  var toSEARCH = $("#toSEARCH").val();
+  var TOengine = getEngines();
+  var TOdata = getData();
+  var TOoutput = getOutput();
+  $.ajax({
+    type: "POST",
+    url: "datascrape00",
+    data: {"TOengine": TOengine, "TOdata": TOdata, 
+           "TOoutput": TOoutput, "toSEARCH": toSEARCH},
+    success:function(data) {
+      setLoadingMsg("Done.");
+      setLoadingMsg("");
+    },
+    error:function(data) {
+      setLoadingMsg("Error. Try Again Later.");
+    },
+    complete:function(data) {
+      console.log("complete");
+    }
+  });
+  $("#ScrapeNow").attr("disbaled", false);
+});
