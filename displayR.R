@@ -26,7 +26,7 @@ resultTitles = function(mytble0) {
 
 ### Notes 2018-03-14
 ###@MichelleFairow.
-### Desc: Pie Chart Labels
+### Desc: Pie Chart Labels.
 pchartmain = function(mytble, strtype) {
   msg = toupper(strtype)
   if (strtype == "protocol") {
@@ -47,7 +47,7 @@ pchartmain = function(mytble, strtype) {
 
 ### Notes 2018-03-14
 ###@MichelleFairow.
-### Desc: Pie Chart Colors
+### Desc: Pie Chart Colors.
 pchartcols = function(strtype) {
   if (strtype == "protocol") {
     vc <- c("darkorchid", "gold", "cadetblue", "deeppink",
