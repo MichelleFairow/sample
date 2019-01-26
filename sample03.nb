@@ -13,11 +13,11 @@ ListLinePlot[{Part[bitcnImp, 2;;365, 2],
 		Part[bitcnImp, 2;;365, 4],
 		Part[bitcnImp, 2;;365, 5], 
 		Part[bitcnImp, 2;;365, 6]},
-	PlotLabel?"Yahoo Finance\nBitcoin USD(BTC-USD)\nMarch 27, 2017 to March 27, 2018\n",
-	PlotLegends?{"Open", "High", "Low", "Close", "Adj. Close"},
-	PlotRange?All,
-	AxesLabel?{"Day", "USD"},
-	PlotStyle?{Yellow, Magenta, Blue, Green, Purple, Orange}]
+	PlotLabel->"Yahoo Finance\nBitcoin USD(BTC-USD)\nMarch 27, 2017 to March 27, 2018\n",
+	PlotLegends->{"Open", "High", "Low", "Close", "Adj. Close"},
+	PlotRange->All,
+	AxesLabel->{"Day", "USD"},
+	PlotStyle->{Yellow, Magenta, Blue, Green, Purple, Orange}]
 
 btcdImp=Import["BTCD-USD-Year.csv"];
 ListLinePlot[{Part[btcdImp, 2;;365, 2], 
@@ -25,11 +25,11 @@ ListLinePlot[{Part[btcdImp, 2;;365, 2],
 		Part[btcdImp, 2;;365, 4],
 		Part[btcdImp, 2;;365, 5], 
 		Part[btcdImp, 2;;365, 6]},
-	PlotLabel?"Yahoo Finance\nBitcoinDark USD (BTCD-USD)\nMarch 27, 2017 to March 27, 2018\n",
-	PlotLegends?{"Open", "High", "Low", "Close", "Adj. Close"},
-	PlotRange?All,
-	AxesLabel?{"Day", "USD"},
-	PlotStyle?{Yellow, Magenta, Blue, Green, Purple, Orange}]
+	PlotLabel->"Yahoo Finance\nBitcoinDark USD (BTCD-USD)\nMarch 27, 2017 to March 27, 2018\n",
+	PlotLegends->{"Open", "High", "Low", "Close", "Adj. Close"},
+	PlotRange->All,
+	AxesLabel->{"Day", "USD"},
+	PlotStyle->{Yellow, Magenta, Blue, Green, Purple, Orange}]
 
 btcgImp=Import["BTG-USD-12.csv"];
 ListLinePlot[{Part[btcgImp, 2;;110, 2], 
@@ -37,8 +37,8 @@ ListLinePlot[{Part[btcgImp, 2;;110, 2],
 		Part[btcgImp, 2;;110, 4],
 		Part[btcgImp, 2;;110, 5], 
 		Part[btcgImp, 2;;110, 6]},
-	PlotLabel?"Yahoo Finance\nBitcoin Gold USD (BTG-USD)\nDecember 7, 2017 to March 27, 2018\n",
-	PlotLegends?{"Open", "High", "Low", "Close", "Adj. Close"},
-	PlotRange?All,
-	AxesLabel?{"Day", "USD"},
-	PlotStyle?{Yellow, Magenta, Blue, Green, Purple, Orange}]
+	PlotLabel->"Yahoo Finance\nBitcoin Gold USD (BTG-USD)\nDecember 7, 2017 to March 27, 2018\n",
+	PlotLegends->{"Open", "High", "Low", "Close", "Adj. Close"},
+	PlotRange->All,
+	AxesLabel->{"Day", "USD"},
+	PlotStyle->{Yellow, Magenta, Blue, Green, Purple, Orange}]
